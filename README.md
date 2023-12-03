@@ -40,6 +40,6 @@ pip install openai
 pip install langchain
 `
 
-> ** Note that you would need to pay for an API key from OPENAI in order to run the gpt-4 model**
+> ** Note that you would need to pay for an API key from OPENAI in order to run the gpt-4 model **
 The variable openai.api_key has to be modified to your API key.
-> **URL : ** [openai-api key](https://platform.openai.com/api-keys)
+> ** URL : ** [openai-api key](https://platform.openai.com/api-keys)
