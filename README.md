@@ -4,7 +4,7 @@
 
 > This project is a resume recommendations application that takes a user's resume and the specific job listing the person is going for. Then our application recommendes way the user can improve their resume.
 
-### It uses the following rules uses in the prompt to determine the type of recommendations it provides to the user:
+### It uses the following rules in the prompt to determine the type of recommendations it provides to the user:
 
 > - Check if there are spelling, grammatical errors and 
 if action verbs are being used at the appropriate places. 
