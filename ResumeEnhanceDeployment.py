@@ -1,16 +1,16 @@
 import streamlit as st
+#PyPDF2 to read PDF Files
 from PyPDF2 import PdfReader
+#for interaction with OpenAI GPT model
 import openai
 import sys
 import os
+#aids with the natural language processing
 import langchain
 from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import TokenTextSplitter
+#used for splitting the text
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.chat_models import ChatOpenAI
-from langchain.chains import RetrievalQA
+#used the RecursiveCharacterTextSplitter to split texts into smaller chunks using a recursive charcter based approach
 
 sys.path.append('../..')
 
@@ -24,7 +24,7 @@ st.subheader("Upload your Resume:")
 st.text("By Kwadjo Wusu-Ansah\nand Kwame Afriyie-Buabeng Frimpong")
 upload_cv = st.file_uploader("Choose file", type=["pdf"])
 
-
+#uses the OpenAI GPT-4 model to generate a natural language response based on the prompt given
 def get_completion(prompt, model="gpt-4"):
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
@@ -34,17 +34,19 @@ def get_completion(prompt, model="gpt-4"):
     )
     return response.choices[0].message["content"]
 
-
+#to fetch user input for a job description
 def job_description():
     st.subheader("Enter Job Description:")
     job_description = st.text_area("Paste the job description here:", height=200)
     return job_description
 
+#to fetch the Academic Year of the student
 def getYear():
     year_options=["Freshmen", "Sophomore", "Junior", "Senior"]
     year=st.selectbox("Academic Year: ",year_options)
     return year
 
+#processes PDF, extracts texts, splits texts
 if upload_cv is not None:
     pdf_bd=PdfReader(upload_cv)
     
@@ -68,8 +70,9 @@ year=getYear()
 
     
 
-
+#for output
 if st.button("Generate Feedback"):
+    #prompt the model obeys
     prompt=f"""
 
 You are a professional resume writer. \
@@ -106,7 +109,7 @@ Requirements:```{job_requirements}`````
 
 
 """
-    
+    #response that calls the get_completion
     response=get_completion(prompt)
     st.write(response)
     
